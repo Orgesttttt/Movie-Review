@@ -1,0 +1,224 @@
+.footer {
+    background-color: #050638; /* Deep navy blue matching the website background */
+    color: #ffffff;
+    padding: 40px 0 20px;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Logo and About section */
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.footer-logo h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.footer-logo .red {
+    color: #e61e25; /* Red color from the REELTALK logo */
+}
+
+.footer-logo .white {
+    color: #ffffff;
+}
+
+.footer-about {
+    color: #b0b0c0;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    color: #b0b0c0;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #e61e25; /* Red accent color on hover */
+}
+
+/* Section headers */
+.footer-header {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1a1c4d;
+    color: #ffffff;
+}
+
+/* Genres grid */
+.footer-genres {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.footer-genres a {
+    color: #b0b0c0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-genres a:hover {
+    color: #e61e25; /* Red accent color on hover */
+}
+
+/* Quick links */
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #b0b0c0;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #e61e25; /* Red accent color on hover */
+}
+
+/* Newsletter */
+.footer-newsletter p {
+    color: #b0b0c0;
+    font-size: 14px;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.footer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-form input {
+    padding: 10px;
+    background-color: #101253;
+    border: 1px solid #1e2070;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.footer-form input:focus {
+    outline: none;
+    border-color: #e61e25;
+}
+
+.footer-form button {
+    padding: 10px;
+    background-color: #e61e25;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.footer-form button:hover {
+    background-color: #c41920;
+}
+
+/* Bottom copyright section */
+.footer-bottom {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #1a1c4d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-copyright {
+    color: #7f7f9a;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-legal a {
+    color: #7f7f9a;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #e61e25;
+}
+
+@media (max-width: 768px) {
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .footer-copyright {
+        margin-bottom: 15px;
+    }
+}
+
+/* SVG icons */
+.icon {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+}

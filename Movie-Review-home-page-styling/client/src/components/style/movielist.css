@@ -1,0 +1,32 @@
+.genre {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.genre button{
+    gap: 5px;
+    margin-right: 3px;
+    padding: 10px;
+    background-color: rgba(157, 198, 233, 0.578);
+}
+.genre button:hover{
+    background-color: rgba(157, 198, 233, 0.859);
+}
+.movie-container {
+    display: flex;
+    padding: 40px;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.movieList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px;
+    gap: 20px;
+}
+.movieList a {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
