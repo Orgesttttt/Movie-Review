@@ -4,17 +4,201 @@
     gap: 120px;
     justify-content: space-evenly;
 }
+
 .navLinks img {
     width: 400px;
     padding-right: 60px;
+    cursor: pointer;
 }
+
 .navLinks li {
     display: inline;
     margin-right: 40px;
     font-size: 1.5rem;
 }
-.navLinks input {
-    padding: 5px;
+
+.navLinks li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navLinks li a:hover {
+    color: #e61e25;
+}
+
+/* Updated search form styles */
+.search-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-form input {
+    padding: 10px 16px;
+    padding-right: 40px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.search-form input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    width: 250px;
+}
+
+.search-form input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.search-button:hover .search-icon {
+    stroke: #e61e25;
+}
+
+.search-button:focus {
+    outline: none;
+}
+
+.search-icon {
+    width: 18px;
+    height: 18px;
+    stroke: white;
+    transition: stroke 0.3s ease;
+}
+
+/* Auth nav items */
+.auth-nav-group {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-link {
+    padding: 8px 15px;
     border-radius: 4px;
-    background-color: #e2e2ec;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.login-link {
+    background-color: transparent;
+    border: 1px solid #e61e25;
+    color: #e61e25 !important;
+}
+
+.login-link:hover {
+    background-color: rgba(230, 30, 37, 0.1);
+}
+
+.register-link {
+    background-color: #e61e25;
+    color: white !important;
+}
+
+.register-link:hover {
+    background-color: #c41920;
+}
+
+/* User profile nav item */
+.user-nav-item {
+    margin-right: 0;
+}
+
+.user-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.user-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-icon {
+    font-size: 1.2rem;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .navLinks {
+        gap: 60px;
+    }
+    
+    .navLinks img {
+        width: 300px;
+        padding-right: 30px;
+    }
+    
+    .navLinks li {
+        margin-right: 20px;
+    }
+    
+    .search-form input {
+        width: 150px;
+    }
+    
+    .search-form input:focus {
+        width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navLinks {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 0;
+    }
+    
+    .navLinks img {
+        width: 250px;
+        padding-right: 0;
+    }
+    
+    .navLinks ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+    
+    .navLinks li {
+        margin-right: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .search-form {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .search-form input {
+        width: 100%;
+    }
+    
+    .search-form input:focus {
+        width: 100%;
+    }
 }
