@@ -1,4 +1,8 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+
+// API URL
+const API_URL = 'http://localhost:8000/api';
 
 // Create a context for authentication
 const AuthContext = createContext();
@@ -11,51 +15,138 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  
+  // Configure axios defaults
+  if (token) {
+    axios.defaults.headers.common['x-auth-token'] = token;
+  }
 
-  // Check if user is already logged in (from localStorage)
+  // Check if user is already logged in
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setCurrentUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+    const loadUser = async () => {
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        const res = await axios.get(`${API_URL}/auth/me`);
+        setCurrentUser(res.data);
+      } catch (err) {
+        // Token is invalid or expired
+        localStorage.removeItem('token');
+        delete axios.defaults.headers.common['x-auth-token'];
+      }
+      
+      setLoading(false);
+    };
+    
+    loadUser();
+  }, [token]);
 
   // Register a new user
-  const register = (name, email, password) => {
-    // In a real app, this would make an API call
-    const newUser = { id: Date.now().toString(), name, email };
-    
-    // Store user in localStorage (this simulates a backend)
-    localStorage.setItem('user', JSON.stringify(newUser));
-    setCurrentUser(newUser);
-    return Promise.resolve(newUser);
+  const register = async (name, email, password) => {
+    try {
+      const res = await axios.post(`${API_URL}/auth/register`, {
+        name,
+        email,
+        password
+      });
+      
+      // Set token to localStorage
+      localStorage.setItem('token', res.data.token);
+      
+      // Set auth token header
+      axios.defaults.headers.common['x-auth-token'] = res.data.token;
+      
+      // Set token and user state
+      setToken(res.data.token);
+      setCurrentUser(res.data.user);
+      
+      return res.data.user;
+    } catch (err) {
+      throw err.response.data;
+    }
   };
 
   // Login existing user
-  const login = (email, password) => {
-    // In a real app, this would validate credentials against a backend
-    // For now, we'll create a mock user to simulate successful login
-    const user = { id: Date.now().toString(), name: email.split('@')[0], email };
-    
-    // Store user in localStorage
-    localStorage.setItem('user', JSON.stringify(user));
-    setCurrentUser(user);
-    return Promise.resolve(user);
+  const login = async (email, password) => {
+    try {
+      const res = await axios.post(`${API_URL}/auth/login`, {
+        email,
+        password
+      });
+      
+      // Set token to localStorage
+      localStorage.setItem('token', res.data.token);
+      
+      // Set auth token header
+      axios.defaults.headers.common['x-auth-token'] = res.data.token;
+      
+      // Set token and user state
+      setToken(res.data.token);
+      setCurrentUser(res.data.user);
+      
+      return res.data.user;
+    } catch (err) {
+      throw err.response.data;
+    }
   };
 
   // Logout user
   const logout = () => {
-    localStorage.removeItem('user');
+    // Remove token from localStorage
+    localStorage.removeItem('token');
+    
+    // Remove auth header
+    delete axios.defaults.headers.common['x-auth-token'];
+    
+    // Clear state
+    setToken(null);
     setCurrentUser(null);
+  };
+
+  // Add a movie to favorites
+  const addToFavorites = async (movieTitle) => {
+    try {
+      const res = await axios.post(`${API_URL}/users/favorites`, { movieTitle });
+      return res.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  };
+
+  // Remove a movie from favorites
+  const removeFromFavorites = async (movieTitle) => {
+    try {
+      const res = await axios.delete(`${API_URL}/users/favorites/${encodeURIComponent(movieTitle)}`);
+      return res.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  };
+
+  // Get user's favorites
+  const getFavorites = async () => {
+    try {
+      const res = await axios.get(`${API_URL}/users/favorites`);
+      return res.data;
+    } catch (err) {
+      throw err.response.data;
+    }
   };
 
   const value = {
     currentUser,
-    login,
+    token,
+    loading,
     register,
+    login,
     logout,
-    loading
+    addToFavorites,
+    removeFromFavorites,
+    getFavorites
   };
 
   return (

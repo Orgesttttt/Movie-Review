@@ -3,6 +3,7 @@ import { AuthProvider } from './Context/AuthContext.jsx';
 import { SearchProvider } from './Context/SearchContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import MovieList from './pages/MovieList.jsx';
+import MovieDetails from './pages/MovieDetails.jsx';
 import Favourites from './pages/Favourites.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
@@ -24,6 +25,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/movies" element={<MovieList />} />
+            <Route path="/movie/:movieTitle" element={<MovieDetails />} />
             
             {/* Protected routes */}
             <Route 

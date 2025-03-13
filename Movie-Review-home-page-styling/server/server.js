@@ -1,15 +1,38 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
+const commentRoutes = require('./routes/comment');
+
+// Load environment variables
+dotenv.config();
+
+// Initialize express app
 const app = express();
-require("dotenv").config();
-const port =  process.env.port || 8000;
 
-require("./config/mongoose.config");
-
-app.use(cors());
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-require("./routes/movie.routes")(app);
+app.use(cors());
+app.use('/api/comments', commentRoutes);
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port})`)});
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Failed to connect to MongoDB:', err));
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+
+// Default route
+app.get('/', (req, res) => {
+  res.send('Movie Review API is running');
+});
+
+// Start server
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
